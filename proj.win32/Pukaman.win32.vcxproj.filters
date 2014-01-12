@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{a5ced817-d9eb-4efb-981d-14f9f93472df}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{bfdabe99-cb31-4855-b2b0-833917369384}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{f11cb763-1484-45b3-b58c-b0588fb2b3db}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="source\data">
+      <UniqueIdentifier>{7101bfcc-4347-4908-9419-707b03610010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ui">
+      <UniqueIdentifier>{71467c82-a9ff-4cdb-a072-c0b0922c7212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\utils">
+      <UniqueIdentifier>{72988f2c-1b20-4184-86a4-0ce996e5c99d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Pukaman.ico">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="C:\Users\kanon\Desktop\hand.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="C:\Users\kanon\Desktop\body.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\uiText.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z0.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z1.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z2.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z3.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z4.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z5.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z6.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z7.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z8.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\z9.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\zAdd.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\newHighScore.png">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Pukaman.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="PukaManMain.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="StartPanel.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStage.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="RoleVo.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="PukaManCore.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorUtil.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="PukaManMain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="StartPanel.cpp">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStage.cpp">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="RoleVo.cpp">
+      <Filter>source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="PukaManCore.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorUtil.cpp">
+      <Filter>source\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Documents and Settings\Kanon\桌面\shadow.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\Bombo.plist">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+</Project>
