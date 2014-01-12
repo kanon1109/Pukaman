@@ -1,6 +1,8 @@
 #pragma once
 //失败消息宏
 #define FAIL "fail"
+//失败消息 新纪录宏
+#define NEW_RECORD "newRecord"
 #include "cocos2d.h"
 #include "RoleVo.h"
 USING_NS_CC;

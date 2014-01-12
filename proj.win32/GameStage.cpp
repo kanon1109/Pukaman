@@ -513,11 +513,10 @@ void GameStage::failCallBackFun(CCObject* data)
 	this->updateHighScore();
 	this->layoutScoreNum(this->highScoreList, 2);
 	//this->newHighScore->stopAllActions();
-	CCNode* nNode = (CCNode*) data;    
+	CCNode* nNode = (CCNode*) data;
 	CCString* str = (CCString*)nNode->getUserData();
-	CCLOG("getCString%s", str->getCString());
 	//ÅÐ¶Ï2¸ö×Ö·û´®ÏàµÈ
-	if(str->isEqual(&CCString("isNew")))
+	if(str->isEqual(&CCString(NEW_RECORD)))
 	{
 		this->newHighScore->stopAllActions();
 		this->newHighScore->setScale(0.0f);

@@ -143,20 +143,17 @@ void PukaManCore::jumpMotion()
 			this->roleVo->handAngularSpeed = 0;
 			this->prevJumpDelay = -1;
 			this->jumpCombo = 0;
-			CCString* str;
+			CCString* str = CCString::create("");
 			if(this->score > this->highScore)
 			{
 				this->highScore = this->score;
-				str = CCString::create("isNew"); 
+				str = CCString::create(NEW_RECORD); 
 			}
-			else
-			{
-				str = CCString::create("notNew");      
-			}
-			//发送失败事件
-			this->nData->setUserData(str);
-			CCNotificationCenter::sharedNotificationCenter()->postNotification(FAIL, (CCObject*)this->nData);
 			this->score = 0;
+			//发送失败事件
+			if(str)	this->nData->setUserData(str);
+			CCNotificationCenter::sharedNotificationCenter()->postNotification(FAIL, (CCObject*)this->nData);
+			
 		}
 	}
 	else
