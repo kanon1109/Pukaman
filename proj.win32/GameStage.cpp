@@ -448,8 +448,8 @@ cocos2d::CCPoint GameStage::getGunPos()
 	return pos;
 }
 
-//获取数字纹理
-void GameStage::getNumTexture(CCArray* textureNameList, char* headStr, int num, char* tail)
+//获取数字纹理 char *背后的含义是：给我个字符串，我要修改它。const char *背后的含义是：给我个字符串，我只要读取它。
+void GameStage::getNumTexture(CCArray* textureNameList, const char* headStr, int num, const char* tail)
 {
 	//最多11位char数组
 	char numStr[12] = "0";

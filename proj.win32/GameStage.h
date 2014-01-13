@@ -63,7 +63,7 @@ private:
 	//UI文本
 	CCSprite* uiText;
 	//设置连跳跃 UI
-	void getNumTexture(CCArray* textureNameList, char* headStr, int num, char* tail);
+	void getNumTexture(CCArray* textureNameList, const char* headStr, int num, const char* tail);
 	//设置数字显示
 	void updateNumSprite(CCNode* node, CCArray* souceList, int num, float startX, float startY);
 	//combo纹理列表
