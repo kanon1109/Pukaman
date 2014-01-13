@@ -3,8 +3,8 @@
 USING_NS_CC;
 GameStage::GameStage(void)
 {
-	this->stageWidth = CCDirector::sharedDirector()->getWinSize().width;
-	this->stageHeight = CCDirector::sharedDirector()->getWinSize().height;
+	this->stageWidth = 640;
+	this->stageHeight = 360;
 
 	//ÊÇ·ñ±»ÏÔÊ¾
 	this->isShowed = false;
