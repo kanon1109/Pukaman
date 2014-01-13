@@ -3,8 +3,9 @@
 USING_NS_CC;
 GameStage::GameStage(void)
 {
-	this->stageWidth = CCDirector::sharedDirector()->getVisibleSize().width;
-	this->stageHeight = CCDirector::sharedDirector()->getVisibleSize().height;
+	this->stageWidth = CCDirector::sharedDirector()->getWinSize().width;
+	this->stageHeight = CCDirector::sharedDirector()->getWinSize().height;
+
 	//是否被显示
 	this->isShowed = false;
 	//背景
@@ -94,7 +95,7 @@ GameStage::GameStage(void)
 	this->bomb = NULL;
 	//初始化核心类
 	this->pukaManCore = new PukaManCore();
-	this->pukaManCore->initGame(25, 2, 15, 15, .98, 5, CCDirector::sharedDirector()->getVisibleSize().height - 35, 70);
+	this->pukaManCore->initGame(25, 2, 15, 15, .98, 5, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
 	
 	//设置初始位置
 	this->role->setPosition(ccp(this->pukaManCore->roleVo->x, 

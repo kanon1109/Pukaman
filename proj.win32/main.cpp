@@ -26,7 +26,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
     eglView->setFrameSize(640, 360);
-
     int ret = CCApplication::sharedApplication()->run();
 
 #ifdef USE_WIN32_CONSOLE

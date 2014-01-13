@@ -14,7 +14,7 @@ StartPanel::StartPanel(void)
 
 	// 舞台大小
 	CCDirector* director = CCDirector::sharedDirector();
-	CCSize size = director->getVisibleSize();
+	CCSize size = director->getWinSize();
 
 	this->startLabel = CCLabelTTF::create("CLICK TO START", "Helvetica", 20);
 	//设置文字颜色
