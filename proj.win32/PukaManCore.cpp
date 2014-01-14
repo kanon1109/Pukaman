@@ -48,6 +48,8 @@ void PukaManCore::initGame( double maxVx, double minVx,
 	this->roleVo->g = g;
 	this->roleVo->x = 180;
 	this->roleVo->y = this->bottom;
+	this->roleVo->width = 45;
+	this->roleVo->height = 64;
 	this->maxBgWidth = 640;
 	this->bgWidth = this->maxBgWidth;
 
@@ -129,7 +131,7 @@ void PukaManCore::jumpMotion()
 		if(this->roleVo->y > this->top)
 		{
 			this->roleVo->y = this->top;
-			this->roleVo->vy = -(float) abs(this->roleVo->vy) * .001;
+			this->roleVo->vy = -(float) abs(this->roleVo->vy) * 0.0001;
 		}
 		//下落到地面
 		if(this->roleVo->y < this->bottom)
@@ -196,9 +198,9 @@ void PukaManCore::checkBgWidth()
 	if(this->isJump)
 	{
 		if(this->jumpCombo <= 5)
-			this->widthDis = this->maxBgWidth - 110 * this->jumpCombo;
+			this->widthDis = this->maxBgWidth - 100 * this->jumpCombo;
 		if(this->bgWidth > this->widthDis)
-			this->bgWidth -= 2;
+			this->bgWidth -= 1;
 		if(this->bgWidth < this->minBgWidth) this->bgWidth = this->minBgWidth;
 	}
 	else

@@ -5,7 +5,6 @@ GameStage::GameStage(void)
 {
 	this->stageWidth = 640;
 	this->stageHeight = 360;
-
 	//是否被显示
 	this->isShowed = false;
 	//背景
@@ -19,7 +18,7 @@ GameStage::GameStage(void)
 
 	//运动背景
 	float bgWidth = 43;
-	float bgHeigth = stageHeight - 150;
+	float bgHeigth = this->stageHeight - 150;
 	float gapH = 10;
 	//使这个数组已经是当前类的成员变量，也必须要做一次retain
 	this->drawBgList = CCArray::create();
@@ -69,6 +68,11 @@ GameStage::GameStage(void)
 		drawNode->setPositionX(this->stageWidth * (i - 1));
 		this->frontBgList->addObject(drawNode);
 	}
+
+	//初始化核心类
+	this->pukaManCore = new PukaManCore();
+	this->pukaManCore->initGame(17, 2, 10, 15, .3, 0, this->stageHeight - 35, 70);
+
 	//初始化角色
 	this->role = CCSprite::create();
 	this->addChild(this->role);
@@ -80,10 +84,14 @@ GameStage::GameStage(void)
 	//手臂
 	this->hand = CCSprite::create("hand.png");
 	this->role->addChild(hand);
-	this->hand->setAnchorPoint(ccp(0.12, 0.7));
+	this->hand->setAnchorPoint(ccp(0.12f, 0.7f));
 	this->hand->setPosition(ccp(this->body->getPosition().x - this->body->getContentSize().width *.5 + 5, 
 								this->body->getPosition().y +
 								this->hand->getContentSize().height - 35));
+
+	//设置初始位置
+	this->role->setPosition(ccp(this->pukaManCore->roleVo->x, 
+								this->pukaManCore->roleVo->y));
 
 	this->uiLayer = CCLayer::create();
 	this->uiText = CCSprite::create("uiText.png");
@@ -93,13 +101,7 @@ GameStage::GameStage(void)
 	this->addChild(this->uiLayer);
 
 	this->bomb = NULL;
-	//初始化核心类
-	this->pukaManCore = new PukaManCore();
-	this->pukaManCore->initGame(25, 2, 15, 15, .98, 5, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
 	
-	//设置初始位置
-	this->role->setPosition(ccp(this->pukaManCore->roleVo->x, 
-								this->pukaManCore->roleVo->y));
 
 	this->comboList = NULL;
 	this->scoreList = NULL;
@@ -239,7 +241,7 @@ void GameStage::render()
 			this->frontBgList->removeObjectAtIndex(i);
 			this->frontBgList->addObject(drawNode);
 		}
-
+		
 		if(i > 0)
 		{
 			prevDrawNode = static_cast<CCDrawNode *>(this->frontBgList->objectAtIndex(i - 1));
@@ -343,10 +345,10 @@ bool GameStage::inWallBoundaries()
 	for (int i = length - 1; i >= 0; i-=1)
 	{
 		drawNode = static_cast<CCDrawNode *>(this->frontBgList->objectAtIndex(i));
-		left = drawNode->getPositionX();
-		right = left + drawNode->getContentSize().width;
-		if(this->role->getPositionX() >= left && 
-			this->role->getPositionX() <= right)
+		left = drawNode->getPositionX() - this->pukaManCore->roleVo->width * .5;
+		right = left + drawNode->getContentSize().width + this->pukaManCore->roleVo->width * .5;
+		if(this->pukaManCore->roleVo->x >= left && 
+			this->pukaManCore->roleVo->x <= right)
 			return true;
 	}
 	return false;

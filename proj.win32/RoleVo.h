@@ -12,6 +12,9 @@ public:
 	//向量
 	float vx;
 	float vy;
+	//高宽
+	float width;
+	float height;
 	//重力
 	float g;
 	//手臂的角度
