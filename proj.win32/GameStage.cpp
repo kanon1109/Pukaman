@@ -71,7 +71,7 @@ GameStage::GameStage(void)
 
 	//初始化核心类
 	this->pukaManCore = new PukaManCore();
-	this->pukaManCore->initGame(17, 2, 10, 15, .3, 0, this->stageHeight - 35, 70);
+	this->pukaManCore->initGame(17, 2, 10, 15, .3, 0, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
 
 	//初始化角色
 	this->role = CCSprite::create();
