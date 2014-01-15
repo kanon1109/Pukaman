@@ -4,7 +4,7 @@
 //失败消息 新纪录宏
 #define NEW_RECORD "newRecord"
 #include "cocos2d.h"
-#include "RoleVo.h"
+#include "data/RoleVo.h"
 USING_NS_CC;
 class PukaManCore:public CCObject
 {

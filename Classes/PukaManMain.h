@@ -1,7 +1,7 @@
 #pragma once
 #include "cocos2d.h"
-#include "StartPanel.h"
-#include "GameStage.h"
+#include "ui/StartPanel.h"
+#include "ui/GameStage.h"
 USING_NS_CC;
 class PukaManMain :	public CCScene, public CCTargetedTouchDelegate
 {

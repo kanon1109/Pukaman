@@ -1,5 +1,5 @@
 #include "GameStage.h"
-#include "ColorUtil.h"
+#include "utils/ColorUtil.h"
 USING_NS_CC;
 GameStage::GameStage(void)
 {
@@ -32,7 +32,7 @@ GameStage::GameStage(void)
 	this->addChild(drawNode);
 
 	drawNode = this->createMotionWall(0, 150, bgWidth, bgHeigth, gapH, color4f);
-	drawNode->setPositionX(posX);
+	drawNode->setPosition(ccp(posX, 0));
 	this->drawBgList->addObject(drawNode);
 	this->addChild(drawNode);
 
@@ -55,7 +55,7 @@ GameStage::GameStage(void)
 	size = CCSizeMake(this->stageWidth, 10);
 	this->floorLineBg->setContentSize(size);
 	this->addChild(this->floorLineBg);
-	this->floorLineBg->setPositionY(this->floorBg->getContentSize().height);
+	this->floorLineBg->setPosition(ccp(this->floorBg->getContentSize().height, 0));
 
 	//Ç°¾°
 	this->frontBgList = CCArray::create();
@@ -65,7 +65,7 @@ GameStage::GameStage(void)
 	{
 		drawNode = this->createFrontMotionWall(0, 83, this->stageWidth, this->stageHeight - 83, i);
 		this->addChild(drawNode);
-		drawNode->setPositionX(this->stageWidth * (i - 1));
+		drawNode->setPosition(ccp(this->stageWidth * (i - 1), 0));
 		this->frontBgList->addObject(drawNode);
 	}
 
@@ -96,7 +96,7 @@ GameStage::GameStage(void)
 	this->uiLayer = CCLayer::create();
 	this->uiText = CCSprite::create("uiText.png");
 	this->uiText->setAnchorPoint(ccp(0, 0));
-	this->uiText->setPositionY(this->stageHeight - 50);
+	this->uiText->setPosition(ccp(this->stageHeight - 50, 0));
 	this->uiLayer->addChild(this->uiText);
 	this->addChild(this->uiLayer);
 
@@ -122,7 +122,7 @@ GameStage::GameStage(void)
 	//¼ÓºÅ
 	CCSprite* addSpt = CCSprite::create("zAdd.png");
 	addSpt->setAnchorPoint(ccp(0, 0));
-	addSpt->setPositionX(-addSpt->getContentSize().width * .5);
+	addSpt->setPosition(ccp(-addSpt->getContentSize().width * .5, 0));
 	this->addScoreSpt->addChild(addSpt);
 	this->addScoreList->insertObject(addSpt, 0);
 
