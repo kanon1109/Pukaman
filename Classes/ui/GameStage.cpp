@@ -18,7 +18,7 @@ GameStage::GameStage(void)
 
 	//运动背景
 	float bgWidth = 43;
-	float bgHeigth = this->stageHeight - 150;
+	float bgHeigth = this->stageHeight - 140;
 	float gapH = 10;
 	//使这个数组已经是当前类的成员变量，也必须要做一次retain
 	this->drawBgList = CCArray::create();
@@ -26,12 +26,12 @@ GameStage::GameStage(void)
 
 	ccColor4F color4f = ColorUtil::getColor4F(56, 57, 51, 255);
 
-	CCDrawNode* drawNode = this->createMotionWall(0, 150, bgWidth, bgHeigth, gapH, color4f);
+	CCDrawNode* drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
 	float posX = drawNode->getContentSize().width;
 	this->drawBgList->addObject(drawNode);
 	this->addChild(drawNode);
 
-	drawNode = this->createMotionWall(0, 150, bgWidth, bgHeigth, gapH, color4f);
+	drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
 	drawNode->setPosition(ccp(posX, 0));
 	this->drawBgList->addObject(drawNode);
 	this->addChild(drawNode);
@@ -55,7 +55,7 @@ GameStage::GameStage(void)
 	size = CCSizeMake(this->stageWidth, 10);
 	this->floorLineBg->setContentSize(size);
 	this->addChild(this->floorLineBg);
-	this->floorLineBg->setPosition(ccp(this->floorBg->getContentSize().height, 0));
+	this->floorLineBg->setPosition(ccp(0, this->floorBg->getContentSize().height));
 
 	//前景
 	this->frontBgList = CCArray::create();
@@ -96,7 +96,7 @@ GameStage::GameStage(void)
 	this->uiLayer = CCLayer::create();
 	this->uiText = CCSprite::create("uiText.png");
 	this->uiText->setAnchorPoint(ccp(0, 0));
-	this->uiText->setPosition(ccp(this->stageHeight - 50, 0));
+	this->uiText->setPosition(ccp(0, this->stageHeight - 50));
 	this->uiLayer->addChild(this->uiText);
 	this->addChild(this->uiLayer);
 
