@@ -4,6 +4,8 @@ USING_NS_CC;
 bool PukaManMain::init()
 {
 	CCLOG("init");
+	MyKeypadDelegate* keypadDelegate = new MyKeypadDelegate();
+	CCDirector::sharedDirector()->getKeypadDispatcher()->addDelegate(keypadDelegate);
 	//开始界面
 	this->startPanel = new StartPanel();
 	this->addChild(this->startPanel);
@@ -48,17 +50,10 @@ void PukaManMain::onExit()
 	CCScene::onExit();
 }
 
-void PukaManMain::keyBackClicked()
+void MyKeypadDelegate::keyBackClicked()
 {
-	CCDirector* director = CCDirector::sharedDirector();
-	CCSize size = director->getWinSize();
-	CCLabelTTF*	startLabel = CCLabelTTF::create("backClick", "Helvetica", 20);
-	//设置文字颜色
-	ccColor3B color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	startLabel->setColor(color);
-	startLabel->setPosition(ccp(size.width *.5, size.height *.2));
-	this->addChild(startLabel);
+	CCDirector::sharedDirector()->end();  
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)  
+	exit(0);  
+#endif  
 }

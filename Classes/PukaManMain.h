@@ -13,7 +13,6 @@ public:
 	virtual bool init();
 	virtual void onExit();
 	virtual void onEnter();
-	virtual void keyBackClicked();
 	virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
 	virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event);
 	//调用宏，会返回一个PukaManMain类的实例，并调用构造函数和init函数
@@ -24,3 +23,8 @@ private:
 	GameStage* gameStage;
 };
 
+class MyKeypadDelegate:public CCScene, public CCKeypadDelegate
+{
+public:
+	virtual void keyBackClicked();
+};
