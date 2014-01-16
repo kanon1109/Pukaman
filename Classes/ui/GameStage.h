@@ -2,7 +2,7 @@
 #include "cocos2d.h"
 #include "PukaManCore.h"
 USING_NS_CC;
-class GameStage:public CCScene
+class GameStage:public CCScene, public CCTargetedTouchDelegate
 {
 public:
 	GameStage(void);
@@ -17,10 +17,9 @@ public:
 	virtual void loop(float dt);
 	//渲染方法
 	void render();
-	//点击方法
-	void touch();
-	//是否显示了
-	bool isShowed;
+	//点击事件
+	virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
+	virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event);
 
 private:
 	//背景
@@ -82,6 +81,8 @@ private:
 	void updateScore();
 	//更新最高分数显示
 	void updateHighScore();
+	//初始化人物
+	void initRole(float x, float y);
 	//添加分数显示
 	CCSprite* addScoreSpt;
 	CCArray* addScoreList;

@@ -3,139 +3,7 @@
 USING_NS_CC;
 GameStage::GameStage(void)
 {
-	this->stageWidth = 640;
-	this->stageHeight = 360;
-	//是否被显示
-	this->isShowed = false;
-	//背景
-	ccColor4B color4b;
-	color4b.r = 42;
-	color4b.g = 43;
-	color4b.b = 38;
-	color4b.a = 0xFF;
-	this->background = CCLayerColor::create(color4b);
-	this->addChild(this->background);
-
-	//运动背景
-	float bgWidth = 43;
-	float bgHeigth = this->stageHeight - 140;
-	float gapH = 10;
-	//使这个数组已经是当前类的成员变量，也必须要做一次retain
-	this->drawBgList = CCArray::create();
-	this->drawBgList->retain();
-
-	ccColor4F color4f = ColorUtil::getColor4F(56, 57, 51, 255);
-
-	CCDrawNode* drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
-	float posX = drawNode->getContentSize().width;
-	this->drawBgList->addObject(drawNode);
-	this->addChild(drawNode);
-
-	drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
-	drawNode->setPosition(ccp(posX, 0));
-	this->drawBgList->addObject(drawNode);
-	this->addChild(drawNode);
-
-	//地板
-	color4b.r = 116;
-	color4b.g = 115;
-	color4b.b = 98;
-	color4b.a = 0xFF;
-	this->floorBg = CCLayerColor::create(color4b);
-
-	CCSize size = CCSizeMake(this->stageWidth, 141);
-	this->floorBg->setContentSize(size);
-	this->addChild(this->floorBg);
-	//地板线条
-	color4b.r = 72;
-	color4b.g = 66;
-	color4b.b = 50;
-	color4b.a = 0xFF;
-	this->floorLineBg = CCLayerColor::create(color4b);
-	size = CCSizeMake(this->stageWidth, 10);
-	this->floorLineBg->setContentSize(size);
-	this->addChild(this->floorLineBg);
-	this->floorLineBg->setPosition(ccp(0, this->floorBg->getContentSize().height));
-
-	//前景
-	this->frontBgList = CCArray::create();
-	this->frontBgList->retain();
-
-	for (int i = 0; i < 3; i++)
-	{
-		drawNode = this->createFrontMotionWall(0, 83, this->stageWidth, this->stageHeight - 83, i);
-		this->addChild(drawNode);
-		drawNode->setPosition(ccp(this->stageWidth * (i - 1), 0));
-		this->frontBgList->addObject(drawNode);
-	}
-
-	//初始化核心类
-	this->pukaManCore = new PukaManCore();
-	this->pukaManCore->initGame(17, 2, 10, 15, .3, 0, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
-
-	//初始化角色
-	this->role = CCSprite::create();
-	this->addChild(this->role);
-	//身体
-	this->body = CCSprite::create("body.png");
-	this->role->addChild(this->body);
-	this->body->setAnchorPoint(ccp(.5, .5));
 	
-	//手臂
-	this->hand = CCSprite::create("hand.png");
-	this->role->addChild(hand);
-	this->hand->setAnchorPoint(ccp(0.12f, 0.7f));
-	this->hand->setPosition(ccp(this->body->getPosition().x - this->body->getContentSize().width *.5 + 5, 
-								this->body->getPosition().y +
-								this->hand->getContentSize().height - 35));
-
-	//设置初始位置
-	this->role->setPosition(ccp(this->pukaManCore->roleVo->x, 
-								this->pukaManCore->roleVo->y));
-
-	this->uiLayer = CCLayer::create();
-	this->uiText = CCSprite::create("uiText.png");
-	this->uiText->setAnchorPoint(ccp(0, 0));
-	this->uiText->setPosition(ccp(0, this->stageHeight - 50));
-	this->uiLayer->addChild(this->uiText);
-	this->addChild(this->uiLayer);
-
-	this->bomb = NULL;
-	
-
-	this->comboList = NULL;
-	this->scoreList = NULL;
-	this->highScoreList = NULL;
-	//设置bombo数字
-	this->updateCombo();
-	this->updateScore();
-	//设置最高分数数字
-	this->updateHighScore();
-
-	this->addScoreSpt = CCSprite::create();
-	this->addScoreList = CCArray::create();
-	this->addScoreList->retain();
-	this->updateNumSprite(this->addScoreSpt, 
-						  this->addScoreList, 
-						  this->pukaManCore->scoreVar, 0, 0);
-	this->uiLayer->addChild(this->addScoreSpt);
-	//加号
-	CCSprite* addSpt = CCSprite::create("zAdd.png");
-	addSpt->setAnchorPoint(ccp(0, 0));
-	addSpt->setPosition(ccp(-addSpt->getContentSize().width * .5, 0));
-	this->addScoreSpt->addChild(addSpt);
-	this->addScoreList->insertObject(addSpt, 0);
-
-	this->layoutScoreNum(this->addScoreList, 0);
-	//父sprite执行颜色变化的时候，子sprite也可以执行到这个变化
-	this->addScoreSpt->setCascadeOpacityEnabled(true);
-	this->addScoreSpt->setVisible(false);
-
-	this->newHighScore = CCSprite::create("newHighScore.png");
-	this->newHighScore->setAnchorPoint(ccp(0.5, 0.5));
-	this->newHighScore->setPosition(ccp(this->stageWidth * .5, this->stageHeight * .5));
-	this->newHighScore->setScale(0.0f);
-	this->uiLayer->addChild(this->newHighScore);
 }
 
 GameStage::~GameStage(void)
@@ -265,26 +133,161 @@ void GameStage::changeScene(float t, CCScene* scene)
 void GameStage::onEnterTransitionDidFinish()
 {
 	CCLOG("onEnterTransitionDidFinish");
-	this->isShowed = true;
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 	this->startLoop();
 }
 
 void GameStage::onEnter()
 {
 	CCLOG("gamestage onEnter");
+	this->stageWidth = 640;
+	this->stageHeight = 360;
 	//监听失败消息
 	CCNotificationCenter::sharedNotificationCenter()->addObserver(
 		this,                         
 		callfuncO_selector(GameStage::failCallBackFun),  // 处理的消息的回调函数
 		FAIL,  // 感兴趣的消息名称
 		NULL);   
+
+	//背景
+	ccColor4B color4b;
+	color4b.r = 42;
+	color4b.g = 43;
+	color4b.b = 38;
+	color4b.a = 0xFF;
+	this->background = CCLayerColor::create(color4b);
+	this->addChild(this->background);
+
+	//运动背景
+	float bgWidth = 43;
+	float bgHeigth = this->stageHeight - 140;
+	float gapH = 10;
+	//使这个数组已经是当前类的成员变量，也必须要做一次retain
+	this->drawBgList = CCArray::create();
+	this->drawBgList->retain();
+
+	ccColor4F color4f = ColorUtil::getColor4F(56, 57, 51, 255);
+
+	CCDrawNode* drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
+	float posX = drawNode->getContentSize().width;
+	this->drawBgList->addObject(drawNode);
+	this->addChild(drawNode);
+
+	drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
+	drawNode->setPosition(ccp(posX, 0));
+	this->drawBgList->addObject(drawNode);
+	this->addChild(drawNode);
+
+	//地板
+	color4b.r = 116;
+	color4b.g = 115;
+	color4b.b = 98;
+	color4b.a = 0xFF;
+	this->floorBg = CCLayerColor::create(color4b);
+
+	CCSize size = CCSizeMake(this->stageWidth, 141);
+	this->floorBg->setContentSize(size);
+	this->addChild(this->floorBg);
+	//地板线条
+	color4b.r = 72;
+	color4b.g = 66;
+	color4b.b = 50;
+	color4b.a = 0xFF;
+	this->floorLineBg = CCLayerColor::create(color4b);
+	size = CCSizeMake(this->stageWidth, 10);
+	this->floorLineBg->setContentSize(size);
+	this->addChild(this->floorLineBg);
+	this->floorLineBg->setPosition(ccp(0, this->floorBg->getContentSize().height));
+
+	//前景
+	this->frontBgList = CCArray::create();
+	this->frontBgList->retain();
+
+	for (int i = 0; i < 3; i++)
+	{
+		drawNode = this->createFrontMotionWall(0, 83, this->stageWidth, this->stageHeight - 83, i);
+		this->addChild(drawNode);
+		drawNode->setPosition(ccp(this->stageWidth * (i - 1), 0));
+		this->frontBgList->addObject(drawNode);
+	}
+
+	//初始化核心类
+	this->pukaManCore = new PukaManCore();
+	this->pukaManCore->initGame(17, 2, 10, 15, 0.3, 0, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
+
+	this->uiLayer = CCLayer::create();
+	this->uiText = CCSprite::create("uiText.png");
+	this->uiText->setAnchorPoint(ccp(0, 0));
+	this->uiText->setPosition(ccp(0, this->stageHeight - 50));
+	this->uiLayer->addChild(this->uiText);
+	this->addChild(this->uiLayer);
+
+	this->bomb = NULL;
+	this->comboList = NULL;
+	this->scoreList = NULL;
+	this->highScoreList = NULL;
+	
+	//设置bombo数字
+	this->updateCombo();
+	this->updateScore();
+	//设置最高分数数字
+	this->updateHighScore();
+	/*初始化人物*/
+	this->initRole(this->pukaManCore->roleVo->x, this->pukaManCore->roleVo->y);
+
+	this->addScoreSpt = CCSprite::create();
+	this->addScoreList = CCArray::create();
+	this->addScoreList->retain();
+	this->updateNumSprite(this->addScoreSpt, 
+							this->addScoreList, 
+							this->pukaManCore->scoreVar, 0, 0);
+	this->uiLayer->addChild(this->addScoreSpt);
+	//加号
+	CCSprite* addSpt = CCSprite::create("zAdd.png");
+	addSpt->setAnchorPoint(ccp(0, 0));
+	addSpt->setPosition(ccp(-addSpt->getContentSize().width * .5, 0));
+	this->addScoreSpt->addChild(addSpt);
+	this->addScoreList->insertObject(addSpt, 0);
+
+	this->layoutScoreNum(this->addScoreList, 0);
+	//父sprite执行颜色变化的时候，子sprite也可以执行到这个变化
+	this->addScoreSpt->setCascadeOpacityEnabled(true);
+	this->addScoreSpt->setVisible(false);
+
+	this->newHighScore = CCSprite::create("newHighScore.png");
+	this->newHighScore->setAnchorPoint(ccp(0.5f, 0.5f));
+	this->newHighScore->setPosition(ccp(this->stageWidth * .5, this->stageHeight * .5));
+	this->newHighScore->setScale(0.0f);
+	this->uiLayer->addChild(this->newHighScore);
 	//必须覆盖onEnter才能执行 loop监听
 	CCScene::onEnter();
+}
+//初始化人物
+void GameStage::initRole( float x, float y )
+{
+	//初始化角色
+	this->role = CCSprite::create();
+	this->addChild(this->role);
+	//身体
+	this->body = CCSprite::create("body.png");
+	this->role->addChild(this->body);
+	this->body->setAnchorPoint(ccp(.5, .5));
+
+	//手臂
+	this->hand = CCSprite::create("hand.png");
+	this->role->addChild(hand);
+	this->hand->setAnchorPoint(ccp(0.12f, 0.7f));
+	this->hand->setPosition(ccp(this->body->getPosition().x - this->body->getContentSize().width *.5 + 5, 
+								this->body->getPosition().y + this->hand->getContentSize().height - 35));
+
+	//设置初始位置
+	this->role->setPosition(ccp(x, y));
 }
 
 void GameStage::onExit()
 {
 	//销毁监听
+	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, FAIL); 
 	CCScene::onExit();
 }
@@ -301,40 +304,6 @@ void GameStage::stopLoop()
 	this->unschedule(schedule_selector(GameStage::loop));
 }
 
-/*点击*/
-void GameStage::touch()
-{
-	if(this->inWallBoundaries())
-	{
-		if(this->pukaManCore->jump())
-		{
-			this->bomb = CCParticleSystemQuad::create("Bombo.plist");
-			//播放完后自动销毁
-			this->bomb->setAutoRemoveOnFinish(true);
-			this->addChild(this->bomb);
-			this->bomb->setPosition(this->getGunPos());
-
-			this->updateCombo();
-			this->updateScore();
-			this->layoutScoreNum(this->scoreList, 1);
-
-			this->addScoreSpt->setPosition(ccp(this->role->getPositionX() - 20, 
-											   this->role->getPositionY() + 
-											   this->role->getContentSize().height + 50));
-			
-			this->addScoreSpt->setVisible(true);
-			this->addScoreSpt->stopAllActions();
-			//移动动作
-			CCActionInterval* moveTo = CCMoveTo::create(0.5f, ccp(this->addScoreSpt->getPositionX(), 
-													 this->addScoreSpt->getPositionY() + 40));
-			//淡出动作
-			CCActionInterval* fadeout = CCFadeOut::create(0.5f);
-			//并列动作
-			CCSpawn* spawn = CCSpawn::create(moveTo, fadeout, NULL);
-			this->addScoreSpt->runAction(spawn);
-		}
-	}
-}
 /*判断跳跃范围，只有在有背景的范围下才能跳跃*/
 bool GameStage::inWallBoundaries()
 {
@@ -587,4 +556,43 @@ void GameStage::updateHighScore()
 					 	 this->pukaManCore->highScore, 
 						 this->stageWidth - 18, 
 						 this->stageHeight - 33);
+}
+
+void GameStage::ccTouchEnded(CCTouch* touch, CCEvent* event)
+{
+}
+
+bool GameStage::ccTouchBegan(CCTouch* touch, CCEvent* event)
+{
+	if(this->inWallBoundaries())
+	{
+		if(this->pukaManCore->jump())
+		{
+			this->bomb = CCParticleSystemQuad::create("Bombo.plist");
+			//播放完后自动销毁
+			this->bomb->setAutoRemoveOnFinish(true);
+			this->addChild(this->bomb);
+			this->bomb->setPosition(this->getGunPos());
+
+			this->updateCombo();
+			this->updateScore();
+			this->layoutScoreNum(this->scoreList, 1);
+
+			this->addScoreSpt->setPosition(ccp(this->role->getPositionX() - 20, 
+				this->role->getPositionY() + 
+				this->role->getContentSize().height + 50));
+
+			this->addScoreSpt->setVisible(true);
+			this->addScoreSpt->stopAllActions();
+			//移动动作
+			CCActionInterval* moveTo = CCMoveTo::create(0.5f, ccp(this->addScoreSpt->getPositionX(), 
+				this->addScoreSpt->getPositionY() + 40));
+			//淡出动作
+			CCActionInterval* fadeout = CCFadeOut::create(0.5f);
+			//并列动作
+			CCSpawn* spawn = CCSpawn::create(moveTo, fadeout, NULL);
+			this->addScoreSpt->runAction(spawn);
+		}
+	}
+	return true;
 }
