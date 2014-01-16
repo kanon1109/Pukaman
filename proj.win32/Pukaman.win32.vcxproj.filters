@@ -22,6 +22,15 @@
     <Filter Include="source\utils">
       <UniqueIdentifier>{72988f2c-1b20-4184-86a4-0ce996e5c99d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\data">
+      <UniqueIdentifier>{08964cfe-8d0c-46ef-9f87-acc37218b51e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\ui">
+      <UniqueIdentifier>{1f32fcf8-31b7-42b7-ba69-8b70757398ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{5ddc34c8-b521-47db-bd39-523b6dc0f940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Pukaman.ico">
@@ -79,57 +88,28 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="PukaManMain.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="StartPanel.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStage.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="RoleVo.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="PukaManCore.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorUtil.h">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="PukaManMain.cpp">
+    <ClCompile Include="..\Classes\main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="StartPanel.cpp">
+    <ClCompile Include="..\Classes\PukaManCore.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PukaManMain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ui\GameStage.cpp">
       <Filter>source\ui</Filter>
     </ClCompile>
-    <ClCompile Include="GameStage.cpp">
+    <ClCompile Include="..\Classes\ui\StartPanel.cpp">
       <Filter>source\ui</Filter>
     </ClCompile>
-    <ClCompile Include="RoleVo.cpp">
+    <ClCompile Include="..\Classes\data\RoleVo.cpp">
       <Filter>source\data</Filter>
     </ClCompile>
-    <ClCompile Include="PukaManCore.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="ColorUtil.cpp">
+    <ClCompile Include="..\Classes\utils\ColorUtil.cpp">
       <Filter>source\utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,5 +120,31 @@
     <None Include="..\Resources\Bombo.plist">
       <Filter>resource</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PukaManCore.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PukaManMain.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\data\RoleVo.h">
+      <Filter>include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ui\GameStage.h">
+      <Filter>include\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ui\StartPanel.h">
+      <Filter>include\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\ColorUtil.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

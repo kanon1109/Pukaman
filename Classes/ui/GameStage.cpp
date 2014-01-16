@@ -1,5 +1,5 @@
 #include "GameStage.h"
-#include "ColorUtil.h"
+#include "utils/ColorUtil.h"
 USING_NS_CC;
 GameStage::GameStage(void)
 {
@@ -18,7 +18,7 @@ GameStage::GameStage(void)
 
 	//运动背景
 	float bgWidth = 43;
-	float bgHeigth = this->stageHeight - 150;
+	float bgHeigth = this->stageHeight - 140;
 	float gapH = 10;
 	//使这个数组已经是当前类的成员变量，也必须要做一次retain
 	this->drawBgList = CCArray::create();
@@ -26,13 +26,13 @@ GameStage::GameStage(void)
 
 	ccColor4F color4f = ColorUtil::getColor4F(56, 57, 51, 255);
 
-	CCDrawNode* drawNode = this->createMotionWall(0, 150, bgWidth, bgHeigth, gapH, color4f);
+	CCDrawNode* drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
 	float posX = drawNode->getContentSize().width;
 	this->drawBgList->addObject(drawNode);
 	this->addChild(drawNode);
 
-	drawNode = this->createMotionWall(0, 150, bgWidth, bgHeigth, gapH, color4f);
-	drawNode->setPositionX(posX);
+	drawNode = this->createMotionWall(0, 140, bgWidth, bgHeigth, gapH, color4f);
+	drawNode->setPosition(ccp(posX, 0));
 	this->drawBgList->addObject(drawNode);
 	this->addChild(drawNode);
 
@@ -55,7 +55,7 @@ GameStage::GameStage(void)
 	size = CCSizeMake(this->stageWidth, 10);
 	this->floorLineBg->setContentSize(size);
 	this->addChild(this->floorLineBg);
-	this->floorLineBg->setPositionY(this->floorBg->getContentSize().height);
+	this->floorLineBg->setPosition(ccp(0, this->floorBg->getContentSize().height));
 
 	//前景
 	this->frontBgList = CCArray::create();
@@ -65,7 +65,7 @@ GameStage::GameStage(void)
 	{
 		drawNode = this->createFrontMotionWall(0, 83, this->stageWidth, this->stageHeight - 83, i);
 		this->addChild(drawNode);
-		drawNode->setPositionX(this->stageWidth * (i - 1));
+		drawNode->setPosition(ccp(this->stageWidth * (i - 1), 0));
 		this->frontBgList->addObject(drawNode);
 	}
 
@@ -96,7 +96,7 @@ GameStage::GameStage(void)
 	this->uiLayer = CCLayer::create();
 	this->uiText = CCSprite::create("uiText.png");
 	this->uiText->setAnchorPoint(ccp(0, 0));
-	this->uiText->setPositionY(this->stageHeight - 50);
+	this->uiText->setPosition(ccp(0, this->stageHeight - 50));
 	this->uiLayer->addChild(this->uiText);
 	this->addChild(this->uiLayer);
 
@@ -122,7 +122,7 @@ GameStage::GameStage(void)
 	//加号
 	CCSprite* addSpt = CCSprite::create("zAdd.png");
 	addSpt->setAnchorPoint(ccp(0, 0));
-	addSpt->setPositionX(-addSpt->getContentSize().width * .5);
+	addSpt->setPosition(ccp(-addSpt->getContentSize().width * .5, 0));
 	this->addScoreSpt->addChild(addSpt);
 	this->addScoreList->insertObject(addSpt, 0);
 
