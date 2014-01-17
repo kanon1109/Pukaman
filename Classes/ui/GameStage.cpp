@@ -1,4 +1,5 @@
 #include "GameStage.h"
+#include "utils/Cookie.h"
 #include "utils/ColorUtil.h"
 USING_NS_CC;
 GameStage::GameStage(void)
@@ -229,11 +230,16 @@ void GameStage::onEnter()
 	this->scoreList = NULL;
 	this->highScoreList = NULL;
 	
+	//设置最高分记录
+	if(Cookie::isSaved())
+		this->pukaManCore->highScore = Cookie::getShareUserData()->getIntegerForKey("highScore");
+
 	//设置bombo数字
 	this->updateCombo();
 	this->updateScore();
 	//设置最高分数数字
 	this->updateHighScore();
+	this->layoutScoreNum(this->highScoreList, 2);
 
 	this->addScoreSpt = CCSprite::create();
 	this->addScoreList = CCArray::create();
@@ -491,6 +497,8 @@ void GameStage::failCallBackFun(CCObject* data)
 	//判断2个字符串相等
 	if(str->isEqual(newRecordStr))
 	{
+		Cookie::getShareUserData()->setIntegerForKey("highScore", this->pukaManCore->highScore);
+		Cookie::getShareUserData()->flush();
 		this->newHighScore->stopAllActions();
 		this->newHighScore->setScale(0.0f);
 		CCActionInterval* scaleTo1 = CCScaleTo::create(0.5f, 1.0f);
