@@ -51,6 +51,7 @@ void PukaManCore::initGame( double maxVx, double minVx,
 	this->roleVo->width = 45;
 	this->roleVo->height = 64;
 	this->maxBgWidth = 640;
+	this->minBgWidth = 100;
 	this->bgWidth = this->maxBgWidth;
 
 	this->score = 0;
