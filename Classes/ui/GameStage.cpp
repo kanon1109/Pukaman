@@ -214,6 +214,8 @@ void GameStage::onEnter()
 	//初始化核心类
 	this->pukaManCore = new PukaManCore();
 	this->pukaManCore->initGame(17, 2, 10, 15, 0.3, 0, CCDirector::sharedDirector()->getWinSize().height - 35, 70);
+	/*初始化人物*/
+	this->initRole(this->pukaManCore->roleVo->x, this->pukaManCore->roleVo->y);
 
 	this->uiLayer = CCLayer::create();
 	this->uiText = CCSprite::create("uiText.png");
@@ -232,8 +234,6 @@ void GameStage::onEnter()
 	this->updateScore();
 	//设置最高分数数字
 	this->updateHighScore();
-	/*初始化人物*/
-	this->initRole(this->pukaManCore->roleVo->x, this->pukaManCore->roleVo->y);
 
 	this->addScoreSpt = CCSprite::create();
 	this->addScoreList = CCArray::create();

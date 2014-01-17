@@ -4,8 +4,8 @@ USING_NS_CC;
 bool PukaManMain::init()
 {
 	CCLOG("init");
-	MyKeypadDelegate* keypadDelegate = new MyKeypadDelegate();
-	CCDirector::sharedDirector()->getKeypadDispatcher()->addDelegate(keypadDelegate);
+	KeypadManager* keypadManager = new KeypadManager();
+	CCDirector::sharedDirector()->getKeypadDispatcher()->addDelegate(keypadManager);
 	//开始界面
 	this->startPanel = new StartPanel();
 	this->addChild(this->startPanel);
@@ -50,7 +50,7 @@ void PukaManMain::onExit()
 	CCScene::onExit();
 }
 
-void MyKeypadDelegate::keyBackClicked()
+void KeypadManager::keyBackClicked()
 {
 	CCDirector::sharedDirector()->end();  
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)  

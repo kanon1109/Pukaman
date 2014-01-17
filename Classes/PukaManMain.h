@@ -23,7 +23,7 @@ private:
 	GameStage* gameStage;
 };
 
-class MyKeypadDelegate:public CCScene, public CCKeypadDelegate
+class KeypadManager:public CCObject, public CCKeypadDelegate
 {
 public:
 	virtual void keyBackClicked();
